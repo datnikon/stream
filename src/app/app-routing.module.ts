@@ -1,7 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () => import('./lazy-modules/home.module').then(h => h.HomeModule)
+  },
+  {
+    path: 'call/:room',
+    loadChildren: () => import('./lazy-modules/call.module').then(c => c.CallModule)
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

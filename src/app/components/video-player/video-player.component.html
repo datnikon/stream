@@ -1,0 +1,7 @@
+<div class="video-player">
+    <video #videoPlayer width="640" height="480" autoplay></video>
+    <div class="action">
+        <img alt="Tắt tiếng" class="icon" (click)="muteOrUnMute()" [src]="getMicSrc()" />
+        <img alt="Tắt tiếng" class="icon" (click)="turnVideoOnOrOff()" [src]="getWebcamSrc()" />
+    </div>
+</div>

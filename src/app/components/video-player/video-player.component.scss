@@ -1,0 +1,19 @@
+.video-player {
+  position: relative;
+  text-align: center;
+  video {
+    max-width: 100%;
+    height: auto;
+    max-height: 45vh;
+  }
+  .action {
+    width: 100%;
+    position: absolute;
+    bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    .icon {
+      opacity: 0.3;
+    }
+  }
+}
