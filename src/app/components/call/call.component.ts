@@ -1,51 +1,24 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { VideoPlayerComponent } from '../video-player/video-player.component';
 
 @Component({
   selector: 'app-call',
   templateUrl: './call.component.html',
   styleUrls: ['./call.component.scss']
 })
-export class CallComponent implements OnInit, AfterViewInit {
+export class CallComponent implements OnInit {
 
-  @ViewChild('myVideo') myVideoElm?: ElementRef;
-  @ViewChild('anotherVideo') anotherVideoElm?: ElementRef;
-  public myVideoElmRef: any;
-  public anotherVideoElmRef: any;
+  @ViewChild('myVideo') myVideo: VideoPlayerComponent;
+  @ViewChild('anotherVideo') anotherVideo: VideoPlayerComponent;
   public peer: any;
   public call: any;
   public roomId: string = '';
-  constructor() { }
-  ngAfterViewInit(): void {
-    this.myVideoElmRef = this.myVideoElm?.nativeElement;
-    this.anotherVideoElmRef = this.anotherVideoElm?.nativeElement;
-  }
+  constructor(
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId');
   }
-
-  public makeCall(): void {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-      this.setMyStream(stream);
-    }).catch((err) => {
-      alert('Chưa cấp quền truy cập camera/mic')
-      console.log(err);
-    })
-  }
-
-  public setAnotherStream(otherUserVideoStream: MediaStream): void {
-    if (this.anotherVideoElmRef) {
-      this.anotherVideoElmRef.srcObject = otherUserVideoStream;
-      this.anotherVideoElmRef.play();
-    }
-
-  }
-
-  public setMyStream(myStream: MediaStream): void {
-    if (this.myVideoElmRef) {
-      this.myVideoElmRef.srcObject = myStream;
-      this.myVideoElmRef.play();
-    }
-  }
-
 
 }

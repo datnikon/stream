@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./lazy-modules/home.module').then(h => h.HomeModule)
   },
   {
-    path: 'call/:room',
+    path: 'call/:roomId',
     loadChildren: () => import('./lazy-modules/call.module').then(c => c.CallModule)
   }
 ];

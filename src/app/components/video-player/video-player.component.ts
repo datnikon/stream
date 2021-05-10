@@ -22,9 +22,13 @@ export class VideoPlayerComponent implements AfterViewInit {
   private soundImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABEUlEQVRIieXVP0oDQRiG8Z+SMoXYxQsEKy0srCyCYC1YWXgHzyF2nkDESkinBP+g1l4goKWxE+sgxGJ3UcbZTWZ1QfCBKYZh3me/2fl2+Y+0mwzv4iRlw3xi+A06TQiK8KWU8FkFy7jFHJ4i620cYSFVXoS/YCSr4g7XQfg9xtiKBbSC+SoOgvkYPQwje8+xjl0MYoLwiBax6bPch5JweEc/Dz+LhcfoYYKNkvXwiKaSck3L2MPll7Hy24JKwpdch+N8RCmr4FBW7oXsepaxj50qeyh4xRXe8vmarINjkha2cTpNUkXRaM9qNlqq5NH3a/qjT0VBNxdMIoJKZr2mQ1kTjtKeK60PaktSafSX+ff4AGpjNL4njw0PAAAAAElFTkSuQmCC';
   private soundOffImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAkElEQVRIie2Suw2AMAwFHzADESvCArSMRsMCUDBOKDCSZZmggC1R5Ko4tt4pH6BgzOQdHr3DXQQ83Fwgw00FWrgU9AACqwPtqWhhKcFA9UbBgdaRep8FPHATa36q1wIAaAGsrLcD6PhArZk+Ut01fndF2Y8sMf+mGuODwAQpcYFL3LgkWTQZswvOPz7nSgpJDrQEcJ0HwMYYAAAAAElFTkSuQmCC'
   constructor(private mediaService: MediaService) { }
+
   ngAfterViewInit(): void {
     this.videoElementRef = this.videoElement.nativeElement;
-    this.showLocalVideo();
+    if (this.mode === 'owner') {
+      this.showLocalVideo();
+    }
+
   }
 
   public showLocalVideo(): void {
