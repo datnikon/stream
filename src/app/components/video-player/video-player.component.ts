@@ -28,7 +28,6 @@ export class VideoPlayerComponent implements AfterViewInit {
     if (this.mode === 'owner') {
       this.showLocalVideo();
     }
-
   }
 
   public showLocalVideo(): void {
