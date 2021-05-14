@@ -14,7 +14,7 @@ io.on('connection', socket => {
     socket.on('join-room', (roomId, userId) => {
         console.log(roomId, userId);
         socket.join(roomId);
-        socket.emit('user-connected', userId);
+        socket.broadcast.to(userId).emit('user-conected', userId);
 
     })
 });

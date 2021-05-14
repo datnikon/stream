@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import io, { Socket } from 'socket.io-client';
-import Utils from 'src/app/utils/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
-  public roomId = Utils.genRoomId();
+  public roomId = '1111';
   public anotherId = new BehaviorSubject(null);
   public socket: Socket;
 

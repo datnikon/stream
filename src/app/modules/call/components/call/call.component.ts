@@ -26,7 +26,9 @@ export class CallComponent implements OnInit {
 
   public listenNewUser(): void {
     this.socketService.anotherId.subscribe(newUserId => {
-      alert('New user' + newUserId);
+      if (newUserId) {
+        alert('New user' + newUserId);
+      }
     })
   }
 
