@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
+import { SocketService } from './socket.service';
 declare var Peer: any;
-import Utils from 'src/app/utils/utils';
 @Injectable({
   providedIn: 'root'
 })
 export class PeerService {
   public peer;
-  public conn;
-  public call;
-  public myPeerId = Utils.genRoomId();
-  constructor() {
-    console.log("MY ID", this.myPeerId);
+  constructor(private socket: SocketService) {
+
   }
 
   initPeer(): void {
-
-    this.peer = new Peer(this.myPeerId);
+    this.peer = new Peer(undefined, {
+      host: '/',
+      port: '3001'
+    });
+    this.openPeer();
   }
 
-  makeCall(amotherid: string, stream: MediaStream): void {
-    this.call = this.peer.call(amotherid, stream);
+  openPeer(): void {
+    this.peer.on('open', id => {
+      this.socket.joinRoom(id)
+    })
   }
 
 }

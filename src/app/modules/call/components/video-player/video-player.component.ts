@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { MediaService } from 'src/app/modules/call/services/media.service';
 import { PeerService } from '../../services/peer.service';
-declare var Peer: any;
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
@@ -41,12 +40,13 @@ export class VideoPlayerComponent implements AfterViewInit {
         this.mediaStreamRef = stream;
         this.videoElementRef.srcObject = stream;
         this.videoElementRef.play();
+        this.makeCall();
       })
     }
   }
 
   makeCall() {
-    const peer = new Peer('pick-an-id');
+    this.peerService.initPeer();
   }
 
   public muteOrUnMute(): void {
