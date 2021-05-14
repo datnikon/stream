@@ -4,11 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./lazy-modules/home.module').then(h => h.HomeModule)
+    loadChildren: () => import('./modules/home/home.module').then(h => h.HomeModule)
   },
   {
     path: 'call/:roomId',
-    loadChildren: () => import('./lazy-modules/call.module').then(c => c.CallModule)
+    loadChildren: () => import('./modules/call/call.module').then(c => c.CallModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./modules/not-found/not-found.module').then(n => n.NotFoundModule)
   }
 ];
 

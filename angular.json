@@ -54,7 +54,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/peerjs/dist/peerjs.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -105,6 +107,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "stream"
 }

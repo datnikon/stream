@@ -14,11 +14,4 @@ export class HomeComponent {
     const roomId = Utils.genRoomId();
     this.router.navigateByUrl(`/call/${roomId}`)
   }
-  public goToRoom(): void {
-    if (this.roomId.length === 4) {
-      this.router.navigateByUrl(`/call/${this.roomId}`)
-    } else {
-      alert("Mã phòng không hợp lệ");
-    }
-  }
 }

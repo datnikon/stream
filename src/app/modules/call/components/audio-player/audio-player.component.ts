@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MediaService } from 'src/app/services/media.service';
+import { MediaService } from 'src/app/modules/call/services/media.service';
 
 @Component({
   selector: 'app-audio-player',

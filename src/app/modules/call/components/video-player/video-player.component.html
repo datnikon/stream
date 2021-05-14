@@ -4,4 +4,9 @@
         <img alt="Tắt tiếng" class="icon" (click)="muteOrUnMute()" [src]="getMicSrc()" />
         <img alt="Tắt tiếng" class="icon" (click)="turnVideoOnOrOff()" [src]="getWebcamSrc()" />
     </div>
+
 </div>
+
+<p>{{remoteId}}</p>
+<input type="text" class="" [(ngModel)]="remoteId" />
+<button type="button" (click)="makeCall">Make phone call</button>

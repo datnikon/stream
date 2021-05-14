@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import io, { Socket } from 'socket.io-client';
-import { SignalData } from 'simple-peer';
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +56,6 @@ export class SocketService {
 export interface SignalMessage {
   callerId?: string
   calleeId?: string,
-  signalData?: SignalData,
   msg?: string,
   roomName?: string
 }

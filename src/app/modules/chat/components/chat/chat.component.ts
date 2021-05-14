@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Chat } from 'src/app/models/chat.model';
+import { Chat } from '../../models/chat.model';
 
 @Component({
   selector: 'app-chat',
@@ -10,7 +10,8 @@ export class ChatComponent implements OnInit {
   public message = '';
   public isMe = true;
   public chats: Chat[] = []
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
