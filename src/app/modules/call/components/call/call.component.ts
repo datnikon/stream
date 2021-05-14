@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SocketService } from '../../services/socket.service';
 import { VideoPlayerComponent } from '../video-player/video-player.component';
 
 @Component({
@@ -15,10 +16,18 @@ export class CallComponent implements OnInit {
   public call: any;
   public roomId: string = '';
   constructor(
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private socketService: SocketService) { }
 
   ngOnInit(): void {
     this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId');
+    this.listenNewUser();
+  }
+
+  public listenNewUser(): void {
+    this.socketService.anotherId.subscribe(newUserId => {
+      alert('New user' + newUserId);
+    })
   }
 
 }

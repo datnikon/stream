@@ -6,15 +6,17 @@ declare var Peer: any;
 })
 export class PeerService {
   public peer;
+  public localMediaStream: MediaStream;
   constructor(private socket: SocketService) {
 
   }
 
-  initPeer(): void {
+  initPeer(stream: MediaStream): void {
     this.peer = new Peer(undefined, {
       host: '/',
       port: '3001'
     });
+    this.localMediaStream = stream;
     this.openPeer();
   }
 
@@ -22,6 +24,10 @@ export class PeerService {
     this.peer.on('open', id => {
       this.socket.joinRoom(id)
     })
+  }
+
+  makeCall(userId: string): void {
+    this.peer.call(userId, this.localMediaStream);
   }
 
 }

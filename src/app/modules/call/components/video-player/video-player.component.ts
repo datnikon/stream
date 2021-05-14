@@ -40,14 +40,11 @@ export class VideoPlayerComponent implements AfterViewInit {
         this.mediaStreamRef = stream;
         this.videoElementRef.srcObject = stream;
         this.videoElementRef.play();
-        this.makeCall();
+        this.peerService.initPeer(stream);
       })
     }
   }
 
-  makeCall() {
-    this.peerService.initPeer();
-  }
 
   public muteOrUnMute(): void {
     if (this.mediaStreamRef) {
