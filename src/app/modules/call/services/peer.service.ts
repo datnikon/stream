@@ -1,33 +1,51 @@
 import { Injectable } from '@angular/core';
-import { SocketService } from './socket.service';
+import { BehaviorSubject } from 'rxjs';
 declare var Peer: any;
-@Injectable({
-  providedIn: 'root'
-})
+
+export interface CallUser {
+  stream: MediaStream;
+}
+@Injectable()
 export class PeerService {
   public peer;
-  public localMediaStream: MediaStream;
-  constructor(private socket: SocketService) {
-
+  public myPeerId: string;
+  public anotherUser = new BehaviorSubject<CallUser>(null);
+  constructor() {
+    this.initPeer();
   }
 
-  initPeer(stream: MediaStream): void {
-    this.peer = new Peer(undefined, {
+
+  initPeer(): void {
+    this.peer = new Peer(this.myPeerId, {
       host: '/',
       port: '3001'
     });
-    this.localMediaStream = stream;
-    this.openPeer();
   }
 
-  openPeer(): void {
-    this.peer.on('open', id => {
-      this.socket.joinRoom(id)
+  openPeer(stream: MediaStream): Promise<string> {
+    return new Promise<string>((resolve) => {
+      this.peer.on('open', (uerPeerId: string) => {
+        this.myPeerId = uerPeerId
+        this.handleCall(stream);
+        resolve(uerPeerId);
+      })
+    }
+    )
+  }
+
+  call(anotherPeerId: string, stream: MediaStream): void {
+    this.peer.call(anotherPeerId, stream);
+  }
+
+  public handleCall(stream: MediaStream): void {
+    this.peer.on('call', call => {
+      console.log('New one call');
+      call.answer(stream);
+      console.log('Ansewerd');
+      call.on('stream', (anotherStream: any) => {
+        this.anotherUser.next({ stream: anotherStream });
+      })
     })
-  }
-
-  makeCall(userId: string): void {
-    this.peer.call(userId, this.localMediaStream);
   }
 
 }

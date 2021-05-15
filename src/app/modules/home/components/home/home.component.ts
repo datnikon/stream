@@ -7,7 +7,6 @@ import Utils from 'src/app/utils/utils';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  public roomId: string = '';
   constructor(private router: Router) { }
 
   public createRoom(): void {

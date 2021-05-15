@@ -1,11 +1,18 @@
 <div class="video-player">
-    <video #videoPlayer width="640" height="480" autoplay></video>
+    <video #videoPlayer
+           width="640"
+           height="480"
+           autoplay></video>
     <div class="action">
-        <img alt="Tắt tiếng" class="icon" (click)="muteOrUnMute()" [src]="getMicSrc()" />
-        <img alt="Tắt tiếng" class="icon" (click)="turnVideoOnOrOff()" [src]="getWebcamSrc()" />
+        <img alt="Tắt tiếng"
+             *ngIf="micIconSrc"
+             class="icon"
+             (click)="muteOrUnMute()"
+             [src]="micIconSrc" />
+        <img alt="Tắt tiếng"
+             *ngIf="webCamIconSrc"
+             class="icon"
+             (click)="turnVideoOnOrOff()"
+             [src]="webCamIconSrc" />
     </div>
-
 </div>
-
-<p>{{remoteId}}</p>
-<input type="text" class="" [(ngModel)]="remoteId" />

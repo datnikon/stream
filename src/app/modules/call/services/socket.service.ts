@@ -2,11 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import io, { Socket } from 'socket.io-client';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SocketService {
-  public roomId = '1111';
   public anotherId = new BehaviorSubject(null);
   public socket: Socket;
 
@@ -15,26 +12,14 @@ export class SocketService {
     this.hanleUserConnected();
   }
 
-  public joinRoom(userId: string): void {
-    this.socket.emit('join-room', this.roomId, userId);
+  public joinRoom(roomId: string, userId: string): void {
+    this.socket.emit('join-room', roomId, userId);
   }
 
   public hanleUserConnected(): void {
     this.socket.on('user-connected', userId => {
-      console.log('User ' + userId + ' connected');
       this.anotherId.next(userId);
     })
+    // this.socket.on('disconnected')
   }
-
-  public callUser(userId: string): void {
-
-  }
-
-}
-
-export interface SignalMessage {
-  callerId?: string
-  calleeId?: string,
-  msg?: string,
-  roomName?: string
 }

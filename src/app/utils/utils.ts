@@ -1,5 +1,6 @@
+import { v4 as uuidV4 } from 'uuid';
 export default class Utils {
     static genRoomId(): string {
-        return `${Math.floor(Math.random() * 9)}${Math.floor(Math.random() * 9)}${Math.floor(Math.random() * 9)}${Math.floor(Math.random() * 9)}`
+        return uuidV4();
     }
 }

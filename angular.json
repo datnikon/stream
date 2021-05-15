@@ -56,6 +56,9 @@
             ],
             "scripts": [
               "./node_modules/peerjs/dist/peerjs.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "lodash"
             ]
           },
           "configurations": {
