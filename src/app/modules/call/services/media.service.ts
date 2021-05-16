@@ -3,35 +3,23 @@ import { BehaviorSubject } from 'rxjs';
 import { MediaIconUrl } from '../data/media-icon';
 @Injectable()
 export class MediaService {
-  public localStream: MediaStream;
+  public stream: MediaStream;
   public isMute = new BehaviorSubject(true);
   public isCameraOff = new BehaviorSubject(true);
   public mode: 'view' | 'owner' = 'view';
-  constructor() { }
-
-  public getMediaStream(constraints?: MediaStreamConstraints): Promise<MediaStream> {
-    return new Promise<MediaStream>((resolve, reject) => {
-      navigator.mediaDevices.getUserMedia(constraints).then(stream => {
-        this.localStream = stream;
-        resolve(stream);
-      }).catch(() => {
-        alert('Bạn chưa cấp quyền truy cập camera/micro');
-        reject();
-      })
-    }
-    )
+  constructor() {
   }
 
   public muteOrUnMute(): void {
-    if (this.localStream) {
+    if (this.stream) {
       this.isMute.next(!this.isMute.getValue());
-      this.localStream.getAudioTracks()[0].enabled = this.isMute.getValue();
+      this.stream.getAudioTracks()[0].enabled = this.isMute.getValue();
     }
   }
   public turnVideoOnOrOff(): void {
-    if (this.localStream) {
+    if (this.stream) {
       this.isCameraOff.next(!this.isCameraOff.getValue());
-      this.localStream.getVideoTracks()[0].enabled = this.isCameraOff.getValue();
+      this.stream.getVideoTracks()[0].enabled = this.isCameraOff.getValue();
     }
   }
 

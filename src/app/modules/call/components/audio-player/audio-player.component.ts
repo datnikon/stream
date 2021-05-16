@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MediaService } from 'src/app/modules/call/services/media.service';
+import Utils from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-audio-player',
@@ -10,7 +10,7 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
   @ViewChild('audioPlayer') audioElement?: any;
   public audioElementRef: any;
   public mediaStreamRef?: MediaStream;
-  constructor(private mediaService: MediaService) { }
+  constructor() { }
   ngAfterViewInit(): void {
     this.audioElementRef = this.audioElement.nativeElement;
     this.showLocalAudio();
@@ -21,7 +21,7 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit {
 
   public showLocalAudio(): void {
     if (this.audioElementRef) {
-      this.mediaService.getMediaStream({ video: true, audio: true }).then(stream => {
+      Utils.getMediaStream({ video: true, audio: true }).then(stream => {
         this.mediaStreamRef = stream;
         this.audioElementRef.srcObject = stream;
         this.audioElementRef.play();

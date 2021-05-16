@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MediaService } from '../../services/media.service';
-import { PeerService } from '../../services/peer.service';
+import Utils from 'src/app/utils/utils';
+import { CallUser, PeerService } from '../../services/peer.service';
 import { SocketService } from '../../services/socket.service';
-import { VideoPlayerComponent } from '../video-player/video-player.component';
 
 @Component({
   selector: 'app-call',
@@ -11,61 +10,69 @@ import { VideoPlayerComponent } from '../video-player/video-player.component';
   styleUrls: ['./call.component.scss']
 })
 export class CallComponent implements OnInit, AfterViewInit {
-
-  @ViewChild('myVideo') myVideo: VideoPlayerComponent;
-  @ViewChild('anotherVideo') anotherVideo: VideoPlayerComponent;
-  public peer: any;
-  public call: any;
-  public roomId: string = '';
+  public joinedUsers: CallUser[] = [];
+  public localStream: MediaStream;
+  private roomId: string = '';
   constructor(
     private activatedRoute: ActivatedRoute,
     private socketService: SocketService,
-    private peerService: PeerService,
-    private mediaService: MediaService) { }
+    private peerService: PeerService,) { }
 
 
   ngAfterViewInit(): void {
-    this.openPeer();
     this.listenNewUser();
+    this.listenLeavedUser();
+    this.openPeer();
   }
 
   ngOnInit(): void {
     this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId');
+    Utils.getMediaStream({ video: true, audio: false }).then(stream => {
+      this.localStream = stream;
+    })
   }
 
-  public listenNewUser(): void {
+  private listenNewUser(): void {
     this.listenNewUserJoinRoom();
     this.listenNewUserStream()
   }
 
-  public listenNewUserJoinRoom(): void {
-    this.socketService.anotherId.subscribe(newUserId => {
+  private listenLeavedUser(): void {
+    this.socketService.leaveId.subscribe(userPeerId => {
+      console.log(userPeerId + " leaved");
+      this.joinedUsers = this.joinedUsers.filter(x => x.peerId != userPeerId);
+    })
+  }
+
+  private listenNewUserJoinRoom(): void {
+    this.socketService.joinId.subscribe(newUserId => {
       if (newUserId) {
-        console.log("new user join ", newUserId);
         this.makeCall(newUserId);
       }
     })
   }
 
-  public listenNewUserStream(): void {
-    this.peerService.anotherUser.subscribe(user => {
+  private listenNewUserStream(): void {
+    this.peerService.joinUser.subscribe(user => {
       if (user) {
-        this.anotherVideo.showAnotherStream(user.stream);
+        if (this.joinedUsers.findIndex(u => u.peerId === user.peerId) < 0) {
+          this.joinedUsers.push(user);
+        }
       }
     })
   }
 
-  public openPeer(): void {
-    this.peerService.openPeer(this.mediaService.localStream).then((myPeerId) => {
+  private openPeer(): void {
+    this.peerService.openPeer(this.localStream).then((myPeerId) => {
       this.joinRoom(this.roomId, myPeerId);
     })
   }
 
-  public makeCall(anotherPeerId: string): void {
-    this.peerService.call(anotherPeerId, this.mediaService.localStream);
+  private makeCall(anotherPeerId: string): void {
+    this.peerService.call(anotherPeerId, this.localStream);
   }
 
-  public joinRoom(roomId: string, userPeerId: string): void {
+  private joinRoom(roomId: string, userPeerId: string): void {
     this.socketService.joinRoom(roomId, userPeerId);
   }
 

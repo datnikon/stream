@@ -1,6 +1,6 @@
 export interface Chat {
-    name: string;
+    name?: string;
     content: string;
     time?: number;
-    isMe: boolean;
+    isMe?: boolean;
 }

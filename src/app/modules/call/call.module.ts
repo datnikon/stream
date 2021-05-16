@@ -6,7 +6,6 @@ import { ChatModule } from "../chat/chat.module";
 import { AudioPlayerComponent } from "./components/audio-player/audio-player.component";
 import { CallComponent } from "./components/call/call.component";
 import { VideoPlayerComponent } from "./components/video-player/video-player.component";
-import { MediaService } from "./services/media.service";
 import { PeerService } from "./services/peer.service";
 import { SocketService } from "./services/socket.service";
 const callRoutes: Routes = [
@@ -23,7 +22,6 @@ const callRoutes: Routes = [
         AudioPlayerComponent
     ],
     providers: [
-        MediaService,
         PeerService,
         SocketService
     ],

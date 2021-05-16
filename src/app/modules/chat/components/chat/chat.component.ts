@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketService } from 'src/app/modules/call/services/socket.service';
 import { Chat } from '../../models/chat.model';
 
 @Component({
@@ -10,17 +11,22 @@ export class ChatComponent implements OnInit {
   public message = '';
   public isMe = true;
   public chats: Chat[] = []
-  constructor() {
+  constructor(private socketService: SocketService) {
   }
 
   ngOnInit(): void {
+    this.socketService.newMessage.subscribe(message => {
+      console.log("New message", message)
+      if (message) {
+        this.chats.push({ content: message })
+      }
+    })
   }
 
   public addMessage(): void {
-    this.chats.unshift({ name: 'Dat', content: this.message, isMe: this.isMe });
+    this.socketService.chat(this.message)
+    this.chats.push({ content: this.message, isMe: true });
     this.message = '';
-    this.isMe = !this.isMe;
-    this.scrollToEnd();
   }
 
   private scrollToEnd(): void {

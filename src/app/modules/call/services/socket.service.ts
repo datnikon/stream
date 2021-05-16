@@ -4,22 +4,37 @@ import io, { Socket } from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  public anotherId = new BehaviorSubject(null);
+  public joinId = new BehaviorSubject(null);
+  public leaveId = new BehaviorSubject(null);
+  public newMessage = new BehaviorSubject(null);
   public socket: Socket;
 
   constructor() {
     this.socket = io('localhost:3000');
     this.hanleUserConnected();
+    this.handleNewMessage();
   }
 
   public joinRoom(roomId: string, userId: string): void {
     this.socket.emit('join-room', roomId, userId);
   }
 
-  public hanleUserConnected(): void {
+  public chat(content: string): void {
+    this.socket.emit('chat', content);
+  }
+
+  private hanleUserConnected(): void {
     this.socket.on('user-connected', userId => {
-      this.anotherId.next(userId);
+      this.joinId.next(userId);
     })
-    // this.socket.on('disconnected')
+    this.socket.on('user-disconnected', userId => {
+      this.leaveId.next(userId);
+    })
+  }
+
+  private handleNewMessage(): void {
+    this.socket.on('new-message', (content) => {
+      this.newMessage.next(content);
+    })
   }
 }
