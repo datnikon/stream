@@ -54,7 +54,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/peerjs/dist/peerjs.min.js"
+              "./node_modules/peerjs/dist/peerjs.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

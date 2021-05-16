@@ -22,13 +22,13 @@ export class CallComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.listenNewUser();
     this.listenLeavedUser();
-    this.openPeer();
   }
 
   ngOnInit(): void {
     this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId');
     Utils.getMediaStream({ video: true, audio: false }).then(stream => {
       this.localStream = stream;
+      this.openPeer();
     })
   }
 

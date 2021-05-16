@@ -18,10 +18,6 @@ export class VideoPlayerComponent implements AfterViewInit {
     private mediaService: MediaService
   ) { }
 
-  ngOnInit() {
-    // this.listenChanges();
-  }
-
   ngAfterViewInit(): void {
     this.mediaService.stream = this.stream;
     this.mediaService.mode = this.mode;

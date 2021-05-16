@@ -11,11 +11,12 @@ export class PeerService {
   public myPeerId: string;
   public joinUser = new BehaviorSubject<CallUser>(null);
   public leaveUser = new BehaviorSubject<string>(null);
+  public localStream: MediaStream;
   constructor() {
-    this.initPeer();
   }
 
   public openPeer(stream: MediaStream): Promise<string> {
+    this.initPeer();
     return new Promise<string>((resolve) => {
       this.peer.on('open', (uerPeerId: string) => {
         this.myPeerId = uerPeerId
@@ -28,25 +29,14 @@ export class PeerService {
 
   public call(anotherPeerId: string, stream: MediaStream): void {
     console.log("Call ", anotherPeerId)
-    let call = this.peer.call(anotherPeerId, stream);
-    call.on('stream', (userVideoStream) => {
-      console.log('Đã trả lừi');
-      this.joinUser.next({ peerId: anotherPeerId, stream: userVideoStream });
-    })
-    call.on('close', () => {
-      console.log('Call close');
-      this.leaveUser.next(anotherPeerId);
-    })
-
-    call.on('error', (error) => {
-      console.log(error);
-    })
+    var call = this.peer.call(anotherPeerId, stream);
+    this.handelAnswerCall(call, anotherPeerId);
   }
 
   public handelAnswerCall(call: any, anotherPeerId: string): void {
-    call.on('stream', (userVideoStream) => {
-      console.log('Đã trả lừi');
-      this.joinUser.next({ peerId: anotherPeerId, stream: userVideoStream });
+    console.log("Hanlde call");
+    call.on('stream', (anotherStream: any) => {
+      this.joinUser.next({ peerId: anotherPeerId, stream: anotherStream });
     })
     call.on('close', () => {
       console.log('Call close');
@@ -60,18 +50,13 @@ export class PeerService {
 
   public handleComingCall(stream: MediaStream): void {
     this.peer.on('call', call => {
-      const answerCall = confirm("Do you want to answer?");
-      if (answerCall) {
-        call.answer(stream);
-        call.on('stream', (anotherStream: any) => {
-          this.joinUser.next({ peerId: call.peer, stream: anotherStream });
-        })
-        call.on('close', () => {
-          console.log('Call close');
-          this.leaveUser.next(call.peer);
-        })
-      }
-
+      call.answer(stream);
+      call.on('stream', (anotherStream: any) => {
+        this.joinUser.next({ peerId: call.peer, stream: anotherStream });
+      })
+      call.on('close', () => {
+        this.leaveUser.next(call.peer);
+      })
     })
   }
 
