@@ -8,6 +8,7 @@ import { CallComponent } from "./components/call/call.component";
 import { VideoPlayerComponent } from "./components/video-player/video-player.component";
 import { PeerService } from "./services/peer.service";
 import { SocketService } from "./services/socket.service";
+import { HttpClientModule } from '@angular/common/http';
 const callRoutes: Routes = [
     {
         path: '',
@@ -25,7 +26,7 @@ const callRoutes: Routes = [
         PeerService,
         SocketService
     ],
-    imports: [RouterModule.forChild(callRoutes), CommonModule, ChatModule, FormsModule],
+    imports: [RouterModule.forChild(callRoutes), CommonModule, ChatModule, FormsModule, HttpClientModule],
     exports: [RouterModule]
 })
 export class CallModule {

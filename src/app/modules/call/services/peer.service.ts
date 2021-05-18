@@ -1,5 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 declare var Peer: any;
 export interface CallUser {
   peerId: string;
@@ -12,17 +13,29 @@ export class PeerService {
   public joinUser = new BehaviorSubject<CallUser>(null);
   public leaveUser = new BehaviorSubject<string>(null);
   public localStream: MediaStream;
+  constructor(private http: HttpClient) { }
+
+  getTurnServeConfig(): Observable<any> {
+    return this.http.put('https://global.xirsys.net/_turn/MyFirstApp', null,
+      {
+        headers: new HttpHeaders(
+          { "Authorization": "Basic " + btoa("datnikon:f0f2a8b6-b7f9-11eb-9b35-0242ac150003") }
+        )
+      })
+  }
 
   public openPeer(stream: MediaStream): Promise<string> {
-    this.initPeer();
     return new Promise<string>((resolve) => {
-      this.peer.on('open', (uerPeerId: string) => {
-        this.myPeerId = uerPeerId
-        this.handleInComingCall(stream);
-        resolve(uerPeerId);
+      this.getTurnServeConfig().subscribe(data => {
+        this.initPeer(data.v);
+        this.peer.on('open', (uerPeerId: string) => {
+          console.log("PEER ID", uerPeerId);
+          this.myPeerId = uerPeerId
+          this.handleInComingCall(stream);
+          resolve(uerPeerId);
+        })
       })
-    }
-    )
+    });
   }
 
   public call(anotherPeerId: string, stream: MediaStream): void {
@@ -45,9 +58,10 @@ export class PeerService {
     })
   }
 
-  private initPeer(): void {
+  private initPeer(config: any): void {
     this.peer = new Peer(this.myPeerId, {
       host: '/',
+      config: config
     });
   }
 
