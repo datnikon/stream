@@ -6,7 +6,6 @@ const io = require('socket.io')(server, {
         methods: ["GET", "POST"]
     }
 });
-const port = process.env.PORT || 3000;
 
 io.on('connection', socket => {
     socket.on('join-room', (roomId, userId) => {
@@ -23,5 +22,5 @@ io.on('connection', socket => {
     })
 
 });
-
+const port = 3000;
 server.listen(port, () => console.log('listening on port' + port));

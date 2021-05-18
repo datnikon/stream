@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/modules/call/services/socket.service';
 import { Chat } from '../../models/chat.model';
 
@@ -15,6 +15,10 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.handleNewMessage();
+  }
+
+  handleNewMessage(): void {
     this.socketService.newMessage.subscribe(message => {
       if (message) {
         this.chats.push({ content: message })

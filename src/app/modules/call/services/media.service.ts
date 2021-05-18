@@ -7,8 +7,6 @@ export class MediaService {
   public isMute = new BehaviorSubject(false);
   public isCameraOff = new BehaviorSubject(false);
   public mode: 'view' | 'owner' = 'view';
-  constructor() {
-  }
 
   public muteOrUnMute(): void {
     if (this.stream) {

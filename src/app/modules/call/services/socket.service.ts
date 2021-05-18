@@ -11,7 +11,7 @@ export class SocketService {
 
   constructor() {
     this.socket = io('localhost:3000');
-    this.hanleUserConnected();
+    this.hanleUserConnect();
     this.handleNewMessage();
   }
 
@@ -23,7 +23,7 @@ export class SocketService {
     this.socket.emit('chat', content);
   }
 
-  private hanleUserConnected(): void {
+  private hanleUserConnect(): void {
     this.socket.on('user-connected', userId => {
       this.joinId.next(userId);
     })
