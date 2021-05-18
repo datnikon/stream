@@ -1,35 +1,22 @@
 .call-container {
   height: 100vh;
-}
-.media-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #171b29;
-  app-video-player + app-video-player {
-    margin: 0.5rem;
-  }
-}
-
-@media (max-width: 719px) {
-  .media-content {
-    position: relative;
-    height: 50vh;
-
-    .my-video {
-      float: right;
-      width: 200px;
-      max-width: 30%;
-      height: auto;
-      position: absolute;
-      bottom: 0.5rem;
-      z-index: 2;
-      right: 0.5rem;
+  width: 100vw;
+  .media-area {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 0.5rem;
+    background-color: #171b29;
+    app-video-player + app-video-player {
+      margin: 0.5rem;
     }
   }
 
-  .chat-content {
-    height: 50vh;
+  @media (max-width: 719px) {
+    .media-area {
+      height: 60vh;
+    }
+    .chat-container {
+      height: 40vh;
+    }
   }
 }

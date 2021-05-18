@@ -4,8 +4,8 @@ import { MediaIconUrl } from '../data/media-icon';
 @Injectable()
 export class MediaService {
   public stream: MediaStream;
-  public isMute = new BehaviorSubject(true);
-  public isCameraOff = new BehaviorSubject(true);
+  public isMute = new BehaviorSubject(false);
+  public isCameraOff = new BehaviorSubject(false);
   public mode: 'view' | 'owner' = 'view';
   constructor() {
   }
@@ -25,12 +25,12 @@ export class MediaService {
 
   public getMicSrc(): string {
     if (this.mode === 'owner') {
-      return this.isMute.getValue() ? MediaIconUrl.micIconUrl : MediaIconUrl.micMuteIconUrl;
+      return this.isMute.getValue() ? MediaIconUrl.micMuteIconUrl : MediaIconUrl.micIconUrl;
     }
-    return this.isMute.getValue() ? MediaIconUrl.soundIconUrl : MediaIconUrl.soundOffIconUrl;
+    return this.isMute.getValue() ? MediaIconUrl.soundOffIconUrl : MediaIconUrl.soundIconUrl;
   }
 
   public getWebcamSrc(): string {
-    return this.isCameraOff.getValue() ? MediaIconUrl.cameraIconUrl : MediaIconUrl.cameraOffIconUrl;
+    return this.isCameraOff.getValue() ? MediaIconUrl.cameraOffIconUrl : MediaIconUrl.cameraIconUrl;
   }
 }

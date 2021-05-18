@@ -1,7 +1,17 @@
 .call-area {
   height: 100vh;
   button {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
+    text-align: center;
     cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #04aa6d;
+    border: none;
+    border-radius: 0.5rem;
+  }
+
+  button:hover {
+    background-color: #3e8e41;
   }
 }

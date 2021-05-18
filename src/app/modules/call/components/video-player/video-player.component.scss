@@ -1,10 +1,11 @@
 .video-player {
   position: relative;
   text-align: center;
+  padding: 0.5rem;
+
   video {
     max-width: 100%;
     height: auto;
-    max-height: 45vh;
   }
   .action {
     width: 100%;
@@ -16,4 +17,8 @@
       opacity: 0.3;
     }
   }
+}
+
+.my-video {
+  background-color: aquamarine;
 }

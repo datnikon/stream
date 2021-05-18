@@ -1,5 +1,5 @@
 <div class="call-container row">
-    <div class="media-content s-12 m-8 l-8">
+    <div class="media-area s-12 m-9 l-10">
         <app-video-player *ngIf="localStream"
                           [mode]="'owner'"
                           [stream]="localStream"
@@ -9,7 +9,7 @@
                           [stream]="user.stream">
         </app-video-player>
     </div>
-    <div class="chat-content s-12 m-4 l-4">
+    <div class="chat-container s-12 m-3 l-2">
         <app-chat></app-chat>
     </div>
 </div>

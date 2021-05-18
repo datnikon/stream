@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MediaService } from 'src/app/modules/call/services/media.service';
+import { skip } from 'rxjs/operators';
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.scss'],
   providers: [MediaService]
 })
-export class VideoPlayerComponent implements AfterViewInit {
+export class VideoPlayerComponent implements AfterViewInit, OnInit {
   @ViewChild('videoPlayer') videoElement?: any;
   @Input() mode: 'view' | 'owner' = 'view';
   @Input() stream: MediaStream;
@@ -18,10 +19,14 @@ export class VideoPlayerComponent implements AfterViewInit {
     private mediaService: MediaService
   ) { }
 
-  ngAfterViewInit(): void {
-    this.mediaService.stream = this.stream;
+  ngOnInit(): void {
     this.mediaService.mode = this.mode;
     this.micIconSrc = this.mediaService.getMicSrc();
+    this.webCamIconSrc = this.mediaService.getWebcamSrc();
+  }
+
+  ngAfterViewInit(): void {
+    this.mediaService.stream = this.stream;
     this.videoElementRef = this.videoElement.nativeElement;
     this.playVideo();
     this.listenChanges();
@@ -36,10 +41,10 @@ export class VideoPlayerComponent implements AfterViewInit {
   }
 
   private listenChanges(): void {
-    this.mediaService.isMute.subscribe(() => {
+    this.mediaService.isMute.pipe(skip(1)).subscribe(() => {
       this.micIconSrc = this.mediaService.getMicSrc();
     })
-    this.mediaService.isCameraOff.subscribe(() => {
+    this.mediaService.isCameraOff.pipe(skip(1)).subscribe(() => {
       this.webCamIconSrc = this.mediaService.getWebcamSrc();
     })
   }

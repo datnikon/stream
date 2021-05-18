@@ -1,4 +1,5 @@
-<div class="video-player">
+<div class="video-player"
+     [ngClass]="{'my-video': mode === 'owner'}">
     <video #videoPlayer
            width="640"
            height="480"
