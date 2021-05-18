@@ -26,7 +26,7 @@ export class CallComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId');
-    Utils.getMediaStream({ video: true, audio: false }).then(stream => {
+    Utils.getMediaStream({ video: true, audio: true }).then(stream => {
       this.localStream = stream;
       this.openPeer();
     })

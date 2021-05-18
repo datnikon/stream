@@ -11,13 +11,13 @@ export class MediaService {
   public muteOrUnMute(): void {
     if (this.stream) {
       this.isMute.next(!this.isMute.getValue());
-      this.stream.getAudioTracks()[0].enabled = this.isMute.getValue();
+      this.stream.getAudioTracks()[0].enabled = !this.isMute.getValue();
     }
   }
   public turnVideoOnOrOff(): void {
     if (this.stream) {
       this.isCameraOff.next(!this.isCameraOff.getValue());
-      this.stream.getVideoTracks()[0].enabled = this.isCameraOff.getValue();
+      this.stream.getVideoTracks()[0].enabled = !this.isCameraOff.getValue();
     }
   }
 

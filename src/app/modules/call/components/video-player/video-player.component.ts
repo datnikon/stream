@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MediaService } from 'src/app/modules/call/services/media.service';
-import { skip } from 'rxjs/operators';
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
@@ -41,10 +40,10 @@ export class VideoPlayerComponent implements AfterViewInit, OnInit {
   }
 
   private listenChanges(): void {
-    this.mediaService.isMute.pipe(skip(1)).subscribe(() => {
+    this.mediaService.isMute.subscribe(() => {
       this.micIconSrc = this.mediaService.getMicSrc();
     })
-    this.mediaService.isCameraOff.pipe(skip(1)).subscribe(() => {
+    this.mediaService.isCameraOff.subscribe(() => {
       this.webCamIconSrc = this.mediaService.getWebcamSrc();
     })
   }
