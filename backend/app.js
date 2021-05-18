@@ -9,14 +9,12 @@ const io = require('socket.io')(server, {
 
 io.on('connection', socket => {
     socket.on('join-room', (roomId, userId) => {
-        console.log(roomId, userId);
         socket.join(roomId);
         socket.broadcast.to(roomId).emit('user-connected', userId);
         socket.on('disconnect', () => {
             socket.broadcast.to(roomId).emit('user-disconnected', userId);
         })
         socket.on('chat', (content) => {
-            console.log(content);
             socket.broadcast.to(roomId).emit('new-message', content);
         })
     })
