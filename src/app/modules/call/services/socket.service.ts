@@ -10,7 +10,7 @@ export class SocketService {
   public socket: Socket;
 
   constructor() {
-    this.socket = io('localhost:3000');
+    this.socket = io('https://live.datnikon.com/', { path: '/socket' });
     this.hanleUserConnect();
     this.handleNewMessage();
   }

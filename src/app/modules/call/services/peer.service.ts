@@ -48,7 +48,6 @@ export class PeerService {
   private initPeer(): void {
     this.peer = new Peer(this.myPeerId, {
       host: '/',
-      port: '3001'
     });
   }
 
