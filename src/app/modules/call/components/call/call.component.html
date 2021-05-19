@@ -1,5 +1,6 @@
 <div class="call-container row">
-    <div class="media-area s-12 m-9 l-10">
+    <div class="media-area s-12 m-9 l-10"
+         [ngClass]="{'m-12 l-12 full-screen': isShowFulScreen}">
         <app-video-player *ngIf="localStream"
                           [mode]="'owner'"
                           [stream]="localStream"
@@ -9,7 +10,7 @@
                           [stream]="user.stream">
         </app-video-player>
     </div>
-    <div class="chat-container s-12 m-3 l-2">
-        <app-chat></app-chat>
+    <div [ngClass]="{'chat-container s-12 m-3 l-2': !isShowFulScreen}">
+        <app-chat (onHide)="showMediaFullscreen()"></app-chat>
     </div>
 </div>

@@ -7,12 +7,17 @@
     padding: 0.5rem;
     background-color: #171b29;
     height: 60vh;
-    app-video-player + app-video-player {
-      margin: 0.5rem;
-    }
   }
   .chat-container {
     height: 40vh;
+  }
+  .full-screen {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  app-video-player {
+    height: fit-content;
   }
 
   @media (min-width: 719px) {

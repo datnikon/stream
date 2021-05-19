@@ -8,6 +8,19 @@
   background-color: #262c42;
   border: 1px solid;
 
+  .chat-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    min-height: 1.5rem;
+    background-color: lavender;
+    .chat-title {
+    }
+    .chat-hidden-action {
+      cursor: pointer;
+    }
+  }
+
   .conversation {
     flex: 1;
     overflow-y: auto;
@@ -41,4 +54,16 @@
       margin: 0.5rem;
     }
   }
+}
+
+.chat-cion {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 30%;
+  cursor: pointer;
 }

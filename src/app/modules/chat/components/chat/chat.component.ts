@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SocketService } from 'src/app/modules/call/services/socket.service';
 import { Chat } from '../../models/chat.model';
 
@@ -11,6 +11,8 @@ export class ChatComponent implements OnInit {
   public message = '';
   public isMe = true;
   public chats: Chat[] = [];
+  public isChatHide = false;
+  @Output() onHide = new EventEmitter();
   constructor(private socketService: SocketService) {
   }
 
@@ -25,6 +27,11 @@ export class ChatComponent implements OnInit {
         this.scrollToNewMessage();
       }
     })
+  }
+
+  hideOrUnhideChat(): void {
+    this.isChatHide = !this.isChatHide
+    this.onHide.emit();
   }
 
   public addMessage(): void {
