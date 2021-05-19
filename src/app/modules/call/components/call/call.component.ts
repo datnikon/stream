@@ -13,7 +13,7 @@ export class CallComponent implements OnInit, AfterViewInit {
   public joinedUsers: CallUser[] = [];
   public localStream: MediaStream;
   public isShowFulScreen: boolean = false;
-  private roomId: string = '';
+  public roomId: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -28,7 +28,7 @@ export class CallComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId');
-    Utils.getMediaStream({ video: false, audio: true }).then(stream => {
+    Utils.getMediaStream({ video: true, audio: true }).then(stream => {
       this.localStream = stream;
       this.openPeer();
     })
@@ -36,7 +36,6 @@ export class CallComponent implements OnInit, AfterViewInit {
 
   showMediaFullscreen(): void {
     this.isShowFulScreen = !this.isShowFulScreen;
-    console.log("ABC", this.isShowFulScreen);
   }
 
   private listenNewUser(): void {

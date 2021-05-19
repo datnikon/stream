@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SocketService } from 'src/app/modules/call/services/socket.service';
 import { Chat } from '../../models/chat.model';
 
@@ -18,6 +18,12 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.handleNewMessage();
+    this.addIntroMessage();
+  }
+
+  addIntroMessage(): void {
+    this.message = `Share this link to your friend to start video call ${window.location.href}`;
+    this.addMessage();
   }
 
   handleNewMessage(): void {

@@ -29,7 +29,6 @@ export class PeerService {
       this.getTurnServeConfig().subscribe(data => {
         this.initPeer(data.v);
         this.peer.on('open', (uerPeerId: string) => {
-          console.log("PEER ID", uerPeerId);
           this.myPeerId = uerPeerId
           this.handleInComingCall(stream);
           resolve(uerPeerId);
