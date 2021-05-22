@@ -1,19 +1,20 @@
 <div class="video-player"
      [ngClass]="{'my-video': mode === 'owner'}">
-    <video #videoPlayer
-           width="640"
-           height="480"
-           autoplay></video>
-    <div class="action">
-        <img alt="Tắt tiếng"
-             *ngIf="micIconSrc"
-             class="icon"
-             (click)="muteOrUnMute()"
-             [src]="micIconSrc" />
-        <img alt="Tắt tiếng"
-             *ngIf="webCamIconSrc"
-             class="icon"
-             (click)="turnVideoOnOrOff()"
-             [src]="webCamIconSrc" />
-    </div>
+     <video #videoPlayer
+            width="640"
+            height="480"
+            muted
+            autoplay></video>
+     <div class="action">
+          <img alt="Tắt tiếng"
+               *ngIf="micIconSrc"
+               class="icon"
+               (click)="muteOrUnMute()"
+               [src]="micIconSrc" />
+          <img alt="Tắt tiếng"
+               *ngIf="webCamIconSrc"
+               class="icon"
+               (click)="turnVideoOnOrOff()"
+               [src]="webCamIconSrc" />
+     </div>
 </div>
