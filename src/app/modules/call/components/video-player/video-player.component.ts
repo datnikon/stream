@@ -27,6 +27,9 @@ export class VideoPlayerComponent implements AfterViewInit, OnInit {
   ngAfterViewInit(): void {
     this.mediaService.stream = this.stream;
     this.videoElementRef = this.videoElement.nativeElement;
+    if (this.mode === 'owner') {
+      this.videoElementRef.muted = true;
+    }
     this.playVideo();
     this.listenChanges();
   }
