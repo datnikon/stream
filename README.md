@@ -1,27 +1,33 @@
-# Stream
+# Introduction
+Make a website for people to make a video call, chat without account with simple steps.
+# Demo
+  You can check on https://live.datnikon.com/
+## Technical
+- Angular 12, NodeJs, PeerJs(base on WebRTC), Socket.Io, Turn server.
+- Hosting/Web server: Alibaba cloud (free version), NGINX, Let's encrypt.
+## How to run
+- Download this source code.
+- Install peer (npm i peer -g).
+- Run 'peerjs --port 3001'.
+- Go to 'backend' folder, run 'npm install', then run 'node app.js'.
+- Go to 'src' folder, run 'npm install', then run 'ng serve --open' to open angular application on port 4200.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.1.
 
-## Development server
+## Build & Deploy
+- Build: ng build --aot
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Deploy
+- You need config turn server before deploy. Take a look in 'getTurnServeConfig()' method of 'peer.service.ts'.
+- Copy code to your server.
+- Use angular-http-server to run your angular code on port 4300 (https://www.npmjs.com/package/angular-http-server).
+- Use PM2 to run start server (pm2 run 'node app.js', start peerjs (pm2 run 'peerjs --port 3001').
+- Install Let's encrypt to cofig https.
+- Take a look with Nginx config file:
+![image](https://user-images.githubusercontent.com/26564132/119516071-a07e9780-bda0-11eb-9be9-0809011867a3.png)
+}
 
-## Code scaffolding
+## Refer:
+- https://www.youtube.com/watch?v=DvlyzDZDEq4
+- https://www.youtube.com/watch?v=_bjOq4wQCZA
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
