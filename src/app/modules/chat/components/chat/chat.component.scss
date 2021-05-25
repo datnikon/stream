@@ -1,13 +1,16 @@
 .chat {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 100vh;
   max-height: 100%;
   background-color: #262c42;
   border: 1px solid;
-
   .chat-header {
     display: flex;
     justify-content: space-between;
@@ -56,14 +59,10 @@
   }
 }
 
-.chat-cion {
-  position: fixed;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  background-color: white;
-  padding: 0.5rem;
-  border-radius: 30%;
-  cursor: pointer;
+@media (min-width: 719px) {
+  .chat {
+    position: static;
+    height: 100vh;
+    max-height: 100%;
+  }
 }

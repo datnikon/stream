@@ -1,31 +1,58 @@
 .call-container {
   height: 100vh;
+  max-height: 100vh;
   width: 100vw;
+  overflow-y: auto;
   .media-area {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
     padding: 0.5rem;
     background-color: #171b29;
-    height: 60vh;
+    max-height: 100vh;
   }
   .chat-container {
-    height: 40vh;
-  }
-  .full-screen {
     height: 100vh;
-    width: 100vw;
+    z-index: 3;
   }
 
   app-video-player {
     height: fit-content;
   }
+}
+.chat-cion {
+  position: fixed;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  z-index: 5;
+  background-color: white;
+  left: 50%;
+  padding: 0.5rem;
+  border-radius: 21%;
+  cursor: pointer;
+  border: 1px solid white;
+  opacity: 0.5;
+}
+@media (max-width: 719px) {
+  .icon-chat-show-mobile {
+    left: 8%;
+    bottom: 4.5rem;
+  }
+}
 
-  @media (min-width: 719px) {
+@media (min-width: 719px) {
+  .call-container {
+    height: 100vh;
+    width: 100vw;
+    .full-screen {
+      height: 100vh;
+      width: 100vw;
+    }
     .media-area {
       height: 100vh;
+      grid-template-columns: auto auto auto;
     }
-    .chat-container {
-      height: 100vh;
-    }
+  }
+  .chat-cion {
+    border-radius: 30%;
   }
 }

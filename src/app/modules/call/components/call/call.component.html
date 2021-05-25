@@ -1,6 +1,6 @@
 <div class="call-container row">
     <div class="media-area s-12 m-9 l-10"
-         [ngClass]="{'m-12 l-12 full-screen': isShowFulScreen}">
+         [ngClass]="{'m-12 l-12 full-screen': isHideChat}">
         <app-video-player *ngIf="localStream"
                           [mode]="'owner'"
                           [stream]="localStream"
@@ -10,7 +10,14 @@
                           [stream]="user.stream">
         </app-video-player>
     </div>
-    <div [ngClass]="{'chat-container s-12 m-3 l-2': !isShowFulScreen}">
+    <div *ngIf="!isHideChat"
+         class="chat-container s-12 m-3 l-2">
         <app-chat (onHide)="showMediaFullscreen()"></app-chat>
     </div>
 </div>
+
+<img alt="chat"
+     class="chat-cion"
+     (click)="hideOrUnhideChat()"
+     [ngClass]="{'icon-chat-show-mobile': !isHideChat}"
+     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAABI0lEQVRYhe3WsUrDcBDH8Q8RHVwEBYW+gbr4BvoSjro4+wKCmxUc+kJ2cPEBnAOODgqi4GKmOiTFNk3/SbVpAu0XDpJw/7tfuLs/x4qWcIsEg5osQTckIMH2fP9pjB18hxwGNSYP5ogWkDjISkCrBcTKxyvO+caTYaqxNFMw9WIqUlelBPlSlCUfMnExNVGCAS2fguUUcJkZv401r2+VBDRGIh2NuijaB8amomtyI/rA2ojPner3QtFGdBMSkCfKDm1m7yd4w+4sQUoInt3Hc/Z8incczxrkPwJ6eEQfTzia4vfX3indEWPc4wzrAb+i3hm1q8xvQ1rCUE/MnUO8YAsdvNadsIgeHqTN+4m9RQuIcC1t4i+cL1rAkA4ucNCUgPbyAw7/hexe/s/CAAAAAElFTkSuQmCC" />

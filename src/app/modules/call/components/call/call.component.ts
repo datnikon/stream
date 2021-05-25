@@ -12,8 +12,8 @@ import { SocketService } from '../../services/socket.service';
 export class CallComponent implements OnInit, AfterViewInit {
   public joinedUsers: CallUser[] = [];
   public localStream: MediaStream;
-  public isShowFulScreen: boolean = false;
   public roomId: string = '';
+  public isHideChat = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -24,6 +24,7 @@ export class CallComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.listenNewUser();
     this.listenLeavedUser();
+    this.detectScreenWith();
   }
 
   ngOnInit(): void {
@@ -34,8 +35,14 @@ export class CallComponent implements OnInit, AfterViewInit {
     })
   }
 
-  showMediaFullscreen(): void {
-    this.isShowFulScreen = !this.isShowFulScreen;
+  detectScreenWith(): void {
+    if (window.screen.width > 719) {
+      this.isHideChat = false;
+    }
+  }
+
+  hideOrUnhideChat(): void {
+    this.isHideChat = !this.isHideChat;
   }
 
   private listenNewUser(): void {

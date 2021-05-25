@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/modules/call/services/socket.service';
 import { Chat } from '../../models/chat.model';
 
@@ -11,18 +11,22 @@ export class ChatComponent implements OnInit {
   public message = '';
   public isMe = true;
   public chats: Chat[] = [];
-  public isChatHide = false;
-  @Output() onHide = new EventEmitter();
   constructor(private socketService: SocketService) {
   }
 
   ngOnInit(): void {
     this.handleNewMessage();
-    this.addIntroMessage();
+    this.addshareLinkMessage();
+    this.addshareGuiMessage();
   }
 
-  addIntroMessage(): void {
+  addshareLinkMessage(): void {
     this.message = `Share this link to your friend to start video call ${window.location.href}`;
+    this.addMessage();
+  }
+
+  addshareGuiMessage(): void {
+    this.message = `Click on the chat icon to hide/unhide the conversation`;
     this.addMessage();
   }
 
@@ -33,11 +37,6 @@ export class ChatComponent implements OnInit {
         this.scrollToNewMessage();
       }
     })
-  }
-
-  hideOrUnhideChat(): void {
-    this.isChatHide = !this.isChatHide
-    this.onHide.emit();
   }
 
   public addMessage(): void {
