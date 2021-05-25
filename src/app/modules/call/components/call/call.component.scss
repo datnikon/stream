@@ -14,11 +14,8 @@
     height: 100vh;
     z-index: 3;
   }
-
-  app-video-player {
-    height: fit-content;
-  }
 }
+
 .chat-cion {
   position: fixed;
   bottom: 1.5rem;
@@ -32,6 +29,7 @@
   border: 1px solid white;
   opacity: 0.5;
 }
+
 @media (max-width: 719px) {
   .icon-chat-show-mobile {
     left: 8%;

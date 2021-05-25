@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./components/home/home.component";
-import { GuiComponent } from './components/gui/gui.component';
 
 const homeRoutes: Routes = [
     {
@@ -13,7 +12,7 @@ const homeRoutes: Routes = [
 ]
 
 @NgModule({
-    declarations: [HomeComponent, GuiComponent],
+    declarations: [HomeComponent],
     imports: [RouterModule.forChild(homeRoutes), CommonModule, FormsModule],
     exports: [RouterModule]
 })

@@ -37,7 +37,9 @@ export class CallComponent implements OnInit, AfterViewInit {
 
   detectScreenWith(): void {
     if (window.screen.width > 719) {
-      this.isHideChat = false;
+      setTimeout(() => {
+        this.isHideChat = false;
+      }, 200);
     }
   }
 
@@ -47,17 +49,17 @@ export class CallComponent implements OnInit, AfterViewInit {
 
   private listenNewUser(): void {
     this.listenNewUserJoinRoom();
-    this.listenNewUserStream()
+    this.listenNewUserStream();
   }
 
   private listenLeavedUser(): void {
-    this.socketService.leaveId.subscribe(userPeerId => {
+    this.socketService.leavedId.subscribe(userPeerId => {
       this.joinedUsers = this.joinedUsers.filter(x => x.peerId != userPeerId);
     })
   }
 
   private listenNewUserJoinRoom(): void {
-    this.socketService.joinId.subscribe(newUserId => {
+    this.socketService.joinedId.subscribe(newUserId => {
       if (newUserId) {
         this.makeCall(newUserId);
       }
