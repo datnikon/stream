@@ -1,5 +1,5 @@
 # Introduction
-Make a website for people to make a video call, chat without account with simple steps.
+A website for people to make a video call, chat without account with simple steps.
 # Demo
   You can check on https://live.datnikon.com/
 ## Technical
@@ -25,7 +25,8 @@ Make a website for people to make a video call, chat without account with simple
 - Take a look with Nginx config file:
 ![image](https://user-images.githubusercontent.com/26564132/119516071-a07e9780-bda0-11eb-9be9-0809011867a3.png)
 }
-
+# Features plan
+Updating
 ## Refer:
 - https://www.youtube.com/watch?v=DvlyzDZDEq4
 - https://www.youtube.com/watch?v=_bjOq4wQCZA
