@@ -11,12 +11,14 @@
     height: auto;
     max-height: 400px;
   }
+
   .action {
     width: 100%;
     position: absolute;
     bottom: 0.5rem;
     display: flex;
     justify-content: center;
+
     .icon {
       opacity: 0.3;
     }

@@ -48,7 +48,7 @@ export class PeerService {
     })
   }
 
-  public handleInComingCall(stream: MediaStream): void {
+  private handleInComingCall(stream: MediaStream): void {
     this.peer.on('call', call => {
       call.answer(stream);
       call.on('stream', (anotherStream: any) => {

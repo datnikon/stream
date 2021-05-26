@@ -9,7 +9,7 @@ export default class Utils {
             navigator.mediaDevices.getUserMedia(constraints).then(stream => {
                 resolve(stream);
             }).catch(() => {
-                alert('Bạn chưa cấp quyền truy cập camera/micro');
+                alert('Have an error when access to camera/micro');
                 reject();
             })
         }

@@ -31,7 +31,7 @@ export class VideoPlayerComponent implements AfterViewInit, OnInit {
       this.videoElementRef.muted = true;
     }
     this.playVideo();
-    this.listenChanges();
+    this.listenMediaControlChanges();
   }
 
   public turnVideoOnOrOff(): void {
@@ -42,7 +42,7 @@ export class VideoPlayerComponent implements AfterViewInit, OnInit {
     this.mediaService.muteOrUnMute();
   }
 
-  private listenChanges(): void {
+  private listenMediaControlChanges(): void {
     this.mediaService.isMute.subscribe(() => {
       this.micIconSrc = this.mediaService.getMicSrc();
     })

@@ -20,7 +20,6 @@ export class CallComponent implements OnInit, AfterViewInit {
     private socketService: SocketService,
     private peerService: PeerService,) { }
 
-
   ngAfterViewInit(): void {
     this.listenNewUser();
     this.listenLeavedUser();
@@ -35,16 +34,16 @@ export class CallComponent implements OnInit, AfterViewInit {
     })
   }
 
-  detectScreenWith(): void {
+  hideOrUnhideChat(): void {
+    this.isHideChat = !this.isHideChat;
+  }
+
+  private detectScreenWith(): void {
     if (window.screen.width > 719) {
       setTimeout(() => {
         this.isHideChat = false;
       }, 200);
     }
-  }
-
-  hideOrUnhideChat(): void {
-    this.isHideChat = !this.isHideChat;
   }
 
   private listenNewUser(): void {

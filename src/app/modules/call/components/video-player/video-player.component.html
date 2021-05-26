@@ -3,12 +3,12 @@
      <video #videoPlayer
             muted></video>
      <div class="action">
-          <img alt="Tắt tiếng"
+          <img alt="Mute or Unmute"
                *ngIf="micIconSrc"
                class="icon"
                (click)="muteOrUnMute()"
                [src]="micIconSrc" />
-          <img alt="Tắt tiếng"
+          <img alt="Camera On Or Off"
                *ngIf="webCamIconSrc"
                class="icon"
                (click)="turnVideoOnOrOff()"
