@@ -8,8 +8,6 @@ import { Chat } from '../../models/chat.model';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  public message = '';
-  public isMe = true;
   public chats: Chat[] = [];
   constructor(private socketService: SocketService) {
   }
@@ -21,13 +19,11 @@ export class ChatComponent implements OnInit {
   }
 
   addshareLinkMessage(): void {
-    this.message = `Share this link to your friend to start video call ${window.location.href}`;
-    this.addMessage();
+    this.addMessage(`Share this link to your friend to start video call ${window.location.href}`);
   }
 
   addshareGuiMessage(): void {
-    this.message = `Click on the chat icon to hide/unhide the conversation`;
-    this.addMessage();
+    this.addMessage(`Click on the chat icon to hide/unhide the conversation`);
   }
 
   handleNewMessage(): void {
@@ -39,10 +35,9 @@ export class ChatComponent implements OnInit {
     })
   }
 
-  public addMessage(): void {
-    this.socketService.chat(this.message)
-    this.chats.push({ content: this.message, isMe: true });
-    this.message = '';
+  public addMessage(message: string): void {
+    this.socketService.chat(message)
+    this.chats.push({ content: message, isMe: true });
     this.scrollToNewMessage();
   }
 

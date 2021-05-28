@@ -1,0 +1,16 @@
+.chat-input {
+  display: flex;
+  align-items: center;
+  textarea {
+    flex: 1;
+    resize: none;
+    padding: 0.5rem;
+    outline: none;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+  }
+}
+
+.emoji-icon {
+  padding: 0.5rem;
+}

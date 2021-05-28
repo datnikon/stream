@@ -1,0 +1,22 @@
+<div class="chat-input">
+    <textarea rows="2"
+              [(ngModel)]="content"
+              (keyup.enter)="submitMessage()"
+              placeholder="Enter content">
+        </textarea>
+    <span class="icon"
+          (click)="hideOrUnhideIcon()">☺</span>
+    <img class="icon"
+         alt="Send"
+         (click)="submitMessage()"
+         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAABkklEQVRIie3VvWsUQRgH4CeJ4BGipLGTFBZ+YJtaQtoYjCD+ARFSxsrGKgSElLFPoyBY2OVIa0CFBLFUuKRKqqBFTGwOP+4sZhc2w+3u3XoXguQHb3Pv3Dy7s7OznOc/yAim8Bx7eDdIrIa7WMM3tDO1129sFLN4iaMIy9ZqP7AreIQ6mjlQK+pNVcUmsIB1/MzB0vqBVwneFpb9Qi/YNTzG+8wkZbWLB04u+1o32G0s4XOXULY2kpX5Ev0+U4ZuVsDS57ksLGc96h0Lu70wHyqgR5hL/r/cof+6DJVc2Yse0B3h0cA9nffBw27gNAvKd24d48n4G/jeYUwTl3uB4Q4OOkzWwgqGk3GX5G/E9V7RNFexnZnoGPcz/SG8yUHbmK8Kw0XhPWzgVtRbKkB/CyfcPyd+JWbxpwDe7Aca5zoOC9A2FvuN1pSfai3hBMvNcFEzJ01slYz5hP0Kc5emho/y7/jpINA0E/iaA98cJAzT+BWhjUGjaZ5E8LPTgoeEL1AKT54WDGPCJ/VtciHnOTv5C+oR7Pjc+gqDAAAAAElFTkSuQmCC" />
+
+</div>
+
+<div *ngIf="isShowIcon">
+    <img alt="icon"
+         *ngFor="let icon of icons; index as idx"
+         class="emoji-icon"
+         src="{{icon}}"
+         (click)="addIcon(idx+1)">
+</div>
