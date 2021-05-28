@@ -10,7 +10,7 @@
                           [stream]="user.stream">
         </app-video-player>
     </div>
-    <div *ngIf="!isHideChat"
+    <div [ngClass]="{'hide':isHideChat}"
          class="chat-container s-12 m-3 l-2">
         <app-chat></app-chat>
     </div>
