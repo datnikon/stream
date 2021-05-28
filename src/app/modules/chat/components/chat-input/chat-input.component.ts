@@ -30,7 +30,7 @@ export class ChatInputComponent implements OnInit {
   }
 
   addIcon(indexIcon: string): void {
-    this.onSubmitMessage.emit(`<img src='https://dblogonline.s3-ap-southeast-1.amazonaws.com/icons/funny/${indexIcon}.gif' alt='con'/>`)
+    this.onSubmitMessage.emit(`<img src='https://dblogonline.s3-ap-southeast-1.amazonaws.com/icons/funny/${indexIcon}.gif' alt='con'/>`);
   }
 
   private createIcons(): void {
